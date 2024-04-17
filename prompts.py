@@ -56,7 +56,7 @@ def get_table_context(table_name: str, table_description: str, metadata_query: s
     conn = st.connection("snowflake")
     columns = conn.query(f"""
         SELECT COLUMN_NAME, DATA_TYPE FROM {table[0].upper()}.INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = 'STG_INVOICES'
+        WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = 'VW_INVOICES'
         """, show_spinner=False,
     )
     columns = "\n".join(
