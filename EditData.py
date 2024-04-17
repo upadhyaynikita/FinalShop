@@ -38,7 +38,7 @@ except Exception as e:
 def fetch_data():
     try:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM STG_INVOICES")
+        cursor.execute(f"SELECT * FROM DFS.DEMO.VW_STAGE")
         columns = [col[0] for col in cursor.description]
         data = cursor.fetchall()
         cursor.close()
@@ -50,12 +50,16 @@ def fetch_data():
 def update_data(column_name, unique_identifier, unique_identifier_value, new_value):
     try:
         cursor = conn.cursor()
-        query = f"UPDATE STG_INVOICES SET {column_name} = %s WHERE {unique_identifier} = %s"
+        query = f"UPDATE {snowflake_table} SET {column_name} = %s WHERE {unique_identifier} = %s"
         cursor.execute(query, (new_value, unique_identifier_value))
         conn.commit()
         st.success("Data Updated Successfully!")
     except Exception as e:
         st.error(f"Error updating data in Snowflake: {str(e)}")
+
+
+
+   
 
 # Main Streamlit App
 # def main():
