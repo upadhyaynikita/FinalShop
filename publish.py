@@ -25,17 +25,19 @@ def publish_data():
     try:
         conn = st.connection("snowflake")
         cursor = conn.cursor()
-
-        # Copy records from STG_INVOICES to WH_INVOICES
-        cursor.execute("INSERT INTO WH_INVOICES SELECT * FROM STG_INVOICES")
-        st.session_state.publish_success = True
-
-        # Truncate STG_INVOICES
+        cursor.execute("INSERT INTO DFS.DEMO.WH_INVOICES SELECT INVOICE_ID, PURCHASE_ORDER , VENDOR_TAX_ID, VENDOR_NAME, VENDOR_ADDRESS, VENDOR_ADDRESS_RECIPIENT, CUSTOMER_NAME, CUSTOMER_ID, INVOICE_DATE, SUB_TOTAL, TOTAL_TAX, INVOICE_TOTAL FROM DFS.DEMO.VW_STAGE WHERE ISSUE_NAME = 'CORRECT RECORDS'")
         cursor.execute("TRUNCATE TABLE STG_INVOICES")
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+        # Copy records from STG_INVOICES to WH_INVOICES
+        # cursor.execute("INSERT INTO WH_INVOICES SELECT * FROM STG_INVOICES")
+        # st.session_state.publish_success = True
+
+        # # Truncate STG_INVOICES
+        # cursor.execute("TRUNCATE TABLE STG_INVOICES")
+
+        # conn.commit()
+        # cursor.close()
+        # conn.close()
 
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
