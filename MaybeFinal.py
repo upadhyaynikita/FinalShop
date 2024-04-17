@@ -390,7 +390,7 @@ def main():
 
             
             # Fetch latest data from Snowflake
-            total_duplicate_records, missing_po, duplicate_customer_name_records, total_tax_out_of_range_records, total_records = fetch_SF_data()
+            total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records = fetch_SF_data()
 
             # Create DataFrame for double bar graph
             df = pd.DataFrame({
