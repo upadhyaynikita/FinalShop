@@ -394,8 +394,8 @@ def main():
 
             # Create DataFrame for double bar graph
             df = pd.DataFrame({
-                'Business Rule': ['Duplicate Records (Invoice ID and Invoice Date)', 'Missing PO for Invoices', 'Duplicate Vendor Names', 'Total Tax Out of Range Records', 'Total Records'],
-                'Count': [total_duplicate_records, missing_po, duplicate_customer_name_records, total_tax_out_of_range_records, total_records],
+                'Business Rule': ['Duplicate Records (Invoice ID and Invoice Date)', 'Missing PO for Invoices', 'PO Mismatch', 'Total Tax Out of Range Records', 'Total Records'],
+                'Count': [total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records],
                 'Color': ['blue', 'blue', 'blue', 'blue', 'orange']
             })
 
