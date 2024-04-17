@@ -1,0 +1,16 @@
+openai
+streamlit
+requests
+azure-storage-blob
+snowflake-connector-python
+pandas
+matplotlib
+plotly
+numpy
+streamlit_option_menu
+snowflake-snowpark-python
+streamlit-float
+streamlit_extras
+azure-identity 
+azure-keyvault-secrets
+
