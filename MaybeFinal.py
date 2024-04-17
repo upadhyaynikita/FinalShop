@@ -144,7 +144,7 @@ def show_modal(content):
 
 
 def main():
-    st.set_page_config(layout="wide")
+    # st.set_page_config(layout="wide")
     st.markdown("""
     <style>
     /* Reduce the size of file uploader */
