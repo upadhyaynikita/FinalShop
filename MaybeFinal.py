@@ -144,7 +144,7 @@ def show_modal(content):
 
 
 def main():
-    # st.set_page_config(layout="wide")
+    st.set_page_config(layout="wide")
     st.markdown("""
     <style>
     /* Reduce the size of file uploader */
@@ -496,7 +496,7 @@ def main():
             st.markdown('<p class="success-message">Published all records successfully!</p>', unsafe_allow_html=True)
 
     with col1:
-        st.markdown("------------------------------------------------------------------------")
+        # st.markdown("------------------------------------------------------------------------")
         # Location 2: Display container if session is started
         
         if st.session_state.get("chatbot_session", False):
