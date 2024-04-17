@@ -374,7 +374,7 @@ def main():
 
         selecteds = option_menu(
             menu_title = None, 
-            options = ["Invoice Discrepancies Summary", "Table Preview of Invoice discrepancies"], 
+            options = ["Invoice Discrepancies Summary", "Table Preview of Uploaded Invoices"], 
             menu_icon="cast", 
             #default_index= 0,
             orientation= "horizontal",
@@ -430,7 +430,6 @@ def main():
             
             # Display data as DataFrame
             df = pd.DataFrame(data, columns=columns)
-        
             st.write(df)
         
             #if st.button("Modify/Update the Incorrect Record"):
@@ -560,5 +559,4 @@ def main():
 if __name__ == "__main__":
     main()
     
-st.markdown("------------------------------------------------------------------------------------------------------------------------------------")
-
+st.markdown("-------------------------------------------------------------------")
