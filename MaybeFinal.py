@@ -306,60 +306,60 @@ def main():
         st.markdown("------------------------------------------------------------------------")
         # Location 2: Display container if session is started
         
-        if st.session_state.get("chatbot_session", False):
+        # if st.session_state.get("chatbot_session", False):
         
-            # Display scrollable container
-            with st.container(height = 500):
+        #     # Display scrollable container
+        #     with st.container(height = 500):
                 
-                st.title("☃️ Devika")
+        #         st.title("☃️ Devika")
 
-                # Initialize the chat messages history
-                client = OpenAI(api_key=st.secrets.OPENAI_API_KEY)
-                if "messages" not in st.session_state:
+        #         # Initialize the chat messages history
+        #         client = OpenAI(api_key=st.secrets.OPENAI_API_KEY)
+        #         if "messages" not in st.session_state:
                     # system prompt includes table information, rules, and prompts the LLM to produce
-                    # a welcome message to the user.
-                    st.session_state.messages = [{"role": "system", "content": get_system_prompt()}]
+                #     # a welcome message to the user.
+                #     st.session_state.messages = [{"role": "system", "content": get_system_prompt()}]
 
 
-                # display the existing chat messages
-                for message in st.session_state.messages:
-                    if message["role"] == "system":
-                        continue
-                    with st.chat_message(message["role"]):
-                        st.write(message["content"])
-                        if "results" in message:
-                            st.dataframe(message["results"])
+                # # display the existing chat messages
+                # for message in st.session_state.messages:
+                #     if message["role"] == "system":
+                #         continue
+                #     with st.chat_message(message["role"]):
+                #         st.write(message["content"])
+                #         if "results" in message:
+                #             st.dataframe(message["results"])
 
-                # If last message is not from assistant, we need to generate a new response
-                if st.session_state.messages[-1]["role"] != "assistant":
-                    with st.chat_message("assistant"):
-                        response = ""
-                        resp_container = st.empty()
-                        for delta in client.chat.completions.create(
-                            model="gpt-4",
-                            messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
-                            stream=True,
-                        ):
-                            response += (delta.choices[0].delta.content or "")
-                            resp_container.markdown(response)
+                # # If last message is not from assistant, we need to generate a new response
+                # if st.session_state.messages[-1]["role"] != "assistant":
+                #     with st.chat_message("assistant"):
+                #         response = ""
+                #         resp_container = st.empty()
+                #         for delta in client.chat.completions.create(
+                #             model="gpt-4",
+                #             messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
+                #             stream=True,
+                        # ):
+                        #     response += (delta.choices[0].delta.content or "")
+                        #     resp_container.markdown(response)
 
-                        message = {"role": "assistant", "content": response}
-                        # Parse the response for a SQL query and execute if available
-                        sql_match = re.search(r"```sql\n(.*)\n```", response, re.DOTALL)
-                        if sql_match:
-                            sql = sql_match.group(1)
-                            conn = st.connection("snowflake")
-                            message["results"] = conn.query(sql)
-                            st.dataframe(message["results"])
-                        st.session_state.messages.append(message)
-                # Prompt for user input and save
-                if prompt := st.chat_input():
-                    st.session_state.messages.append({"role": "user", "content": prompt}) 
-                    st.experimental_rerun()       
-###          
+                        # message = {"role": "assistant", "content": response}
+                        # # Parse the response for a SQL query and execute if available
+                        # sql_match = re.search(r"```sql\n(.*)\n```", response, re.DOTALL)
+                        # if sql_match:
+                        #     sql = sql_match.group(1)
+                        #     conn = st.connection("snowflake")
+                        #     message["results"] = conn.query(sql)
+#                             st.dataframe(message["results"])
+#                         st.session_state.messages.append(message)
+#                 # Prompt for user input and save
+#                 if prompt := st.chat_input():
+#                     st.session_state.messages.append({"role": "user", "content": prompt}) 
+#                     st.experimental_rerun()       
+# ###          
         
-            # Add a button to stop the session
-            stop_chatbot_session()
+#             # Add a button to stop the session
+#             stop_chatbot_session()
            
 
 
