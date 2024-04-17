@@ -19,12 +19,12 @@ def fetch_SF_data():
     total_duplicate_records = sum([record[0] for record in duplicate_records])
     
     # Second business rule: Count of records where Invoice total not equals po total
-    cursor.execute("SELECT COUNT(*) FROM VW_INVOICES WHERE INVOICE_TOTAL <> PO_TOTAL OR PO_TOTAL IS NULL OR PURCHASE_ORDER IS NULL")
+    cursor.execute("SELECT COUNT(*) FROM VW_INVOICES WHERE PO_TOTAL IS NULL OR PURCHASE_ORDER IS NULL")
     missing_po = cursor.fetchone()[0]
-    
-    # Third business rule: Count of records where VENDOR_NAME is duplicate
-    cursor.execute("SELECT COUNT(*) FROM (SELECT VENDOR_NAME FROM VW_INVOICES GROUP BY VENDOR_NAME HAVING COUNT(*) > 1)")
-    duplicate_customer_name_records = cursor.fetchone()[0]
+       
+    # Third business rule: Count of records where PO is mismatch
+    cursor.execute("SELECT COUNT(*) FROM VW_INVOICES WHERE INVOICE_TOTAL <> PO_TOTAL)")
+    po_mismatch = cursor.fetchone()[0]
     
     # Fourth business rule: Count of records where TOTAL_TAX is greater than 10% of SUB_TOTAL or less than 8% of SUB_TOTAL
     cursor.execute("""
@@ -41,7 +41,7 @@ def fetch_SF_data():
     total_records = cursor.fetchone()[0]
     
     # conn.close()
-    return total_duplicate_records, missing_po, duplicate_customer_name_records, total_tax_out_of_range_records, total_records
+    return total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records
 
 
 
