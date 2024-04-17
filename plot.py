@@ -23,7 +23,7 @@ def fetch_SF_data():
     missing_po = cursor.fetchone()[0]
        
     # Third business rule: Count of records where PO is mismatch
-    cursor.execute("SELECT COUNT(*) FROM VW_INVOICES WHERE INVOICE_TOTAL <> PO_TOTAL)")
+    cursor.execute("SELECT COUNT(*) FROM VW_INVOICES WHERE INVOICE_TOTAL <> PO_TOTAL")
     po_mismatch = cursor.fetchone()[0]
     
     # Fourth business rule: Count of records where TOTAL_TAX is greater than 10% of SUB_TOTAL or less than 8% of SUB_TOTAL
