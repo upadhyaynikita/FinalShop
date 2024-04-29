@@ -390,39 +390,38 @@ def main():
 
             
             # Fetch latest data from Snowflake
-            total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records = fetch_SF_data()
+            # total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records = fetch_SF_data()
+            # Fetch data from Snowflake view
+            data = fetch_SF_data()
 
-            # Create DataFrame for double bar graph
-            df = pd.DataFrame({
-                'Business Rule': ['Duplicate Records (Invoice ID and Invoice Date)', 'Missing PO for Invoices', 'PO Mismatch', 'Total Tax Out of Range Records', 'Total Records'],
-                'Count': [total_duplicate_records, missing_po, po_mismatch, total_tax_out_of_range_records, total_records],
-                'Color': ['blue', 'blue', 'blue', 'blue', 'orange']
-            })
+            # Extract rule names and counts
+            rule_names = [row[0] for row in data]
+            counts = [row[1] for row in data]
 
-            # Create double bar graph
-            fig = go.Figure()
+            # Define colors based on rule names
+            colors = ['orange' if rule == 'Total Records' else 'blue' for rule in rule_names]
 
-            for index, row in df.iterrows():
-                fig.add_trace(go.Bar(
-                    y=[row['Business Rule']],
-                    x=[row['Count']],
-                    orientation='h',
-                    marker=dict(color=row['Color']),
-                    name=row['Business Rule'],
-                    width=0.3  # Set the width of the bars
-                ))
+            # Create bar graph
+            fig = go.Figure(go.Bar(
+                y=rule_names,
+                x=counts,
+                orientation='h',
+                marker_color=colors,
+                text=counts,
+                textposition='auto',
+                width=0.5,  # Adjust the width of the bars
+            ))
 
             # Update layout
             fig.update_layout(
-                barmode='group',
                 title='Invoices Discrepancies Summary',
                 yaxis_title='Business Rule',
                 xaxis_title='Records Count',
+                margin=dict(l=150),  # Add margin to accommodate longer y-axis labels
             )
 
             # Display the graph
             st.plotly_chart(fig, use_container_width=True)
-
 
 #2nd tab
         if selecteds == "Table Preview of Uploaded Invoices":
