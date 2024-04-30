@@ -200,6 +200,7 @@ def main():
     st.markdown(markdown_text, unsafe_allow_html=True)
     st.markdown("")
     st.markdown("")
+    st.markdown("")
     approve = st.markdown("<p style='text-align: center;'>File Upload..........Processing & Fraud Detection..........Fraud Correction</p>", unsafe_allow_html=True)
     st.markdown("--------------------------------------------------------------------------------")
 
