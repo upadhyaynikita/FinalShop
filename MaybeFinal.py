@@ -173,7 +173,7 @@ def main():
         text-align: center;
         padding: 0px;
         margin: 0px;
-        background-color: lighblue;
+        background-color: white;
         height : 0px;
     }
     </style>
@@ -189,7 +189,15 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown("<h2 class='title'>ShopSmart Showcase</h2>", unsafe_allow_html=True)
+    # st.markdown("<h2 class='title'>ShopSmart Showcase</h2>", unsafe_allow_html=True)
+    # Load your logo image
+    logo_image = "https://des.analyticsindiamag.com/wp-content/uploads/2023/02/InfoCepts_Logo_Original_InfoCepts_Logo.jpg"
+
+    # Markdown text with image above the title
+    markdown_text = f'<div style="text-align:right;"><img src="{logo_image}" width="150"></div> <h2 class="title">ShopSmart Showcase</h2>'
+
+    # Display the markdown text
+    st.markdown(markdown_text, unsafe_allow_html=True)
     st.markdown("")
     st.markdown("")
     approve = st.markdown("<p style='text-align: center;'>File Upload..........Processing & Fraud Detection..........Fraud Correction</p>", unsafe_allow_html=True)
