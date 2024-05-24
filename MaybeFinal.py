@@ -490,17 +490,8 @@ def main():
             if st.button("Publish all changes to Final Table", help="Click to publish data", key="publish_button"):
                 publish_data()
 
-        if st.session_state.get("publish_success", False):
-            success_message_style = """
-            <style>
-            .success-message {
-             
-                color: #2E8B57;
-            }
-            </style>
-            """
-            st.markdown(success_message_style, unsafe_allow_html=True)
-            st.markdown('<p class="success-message">Published all records successfully!</p>', unsafe_allow_html=True)
+       
+           
 
     with col1:
         # st.markdown("------------------------------------------------------------------------")
