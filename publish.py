@@ -27,6 +27,8 @@ def publish_data():
         cursor = conn.cursor()
         cursor.execute("INSERT INTO DFS.DEMO.WH_INVOICES SELECT INVOICE_ID, PURCHASE_ORDER , VENDOR_TAX_ID, VENDOR_NAME, VENDOR_ADDRESS, VENDOR_ADDRESS_RECIPIENT, CUSTOMER_NAME, CUSTOMER_ID, INVOICE_DATE, SUB_TOTAL, TOTAL_TAX, INVOICE_TOTAL FROM DFS.DEMO.VW_STAGE WHERE ISSUE_NAME = 'CORRECT RECORDS'")
         cursor.execute("TRUNCATE TABLE STG_INVOICES")
+        # Display success message
+        st.success("Records were successfully uploaded!")
 
         # Copy records from STG_INVOICES to WH_INVOICES
         # cursor.execute("INSERT INTO WH_INVOICES SELECT * FROM STG_INVOICES")
