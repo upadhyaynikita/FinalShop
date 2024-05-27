@@ -50,7 +50,7 @@ def fetch_data():
 def update_data(column_name, unique_identifier, unique_identifier_value, new_value):
     try:
         cursor = conn.cursor()
-        query = f"UPDATE DFS.DEMO.stg_invoices SET {column_name} = %s WHERE {unique_identifier} = %s"
+        query = f"UPDATE DFS.DEMO.stg_invoices SET {column_name} = ? WHERE {unique_identifier} = ?"
         cursor.execute(query, (new_value, unique_identifier_value))
         conn.commit()
         st.success("Data Updated Successfully!")
